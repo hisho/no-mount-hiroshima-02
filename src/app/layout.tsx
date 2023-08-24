@@ -9,7 +9,7 @@ export const metadata: Metadata = {
     follow: false,
     index: false,
   },
-  title: 'Pull Request LT',
+  title: 'LT',
 }
 
 type Props = {

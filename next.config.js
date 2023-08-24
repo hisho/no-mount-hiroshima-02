@@ -13,6 +13,9 @@ const nextConfig = () => {
           }
         : false,
     },
+    experimental: {
+      typedRoutes: true,
+    },
     poweredByHeader: false,
     reactStrictMode: false,
   }
