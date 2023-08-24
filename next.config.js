@@ -16,6 +16,7 @@ const nextConfig = () => {
     experimental: {
       typedRoutes: true,
     },
+    output: "export",
     poweredByHeader: false,
     reactStrictMode: false,
   }

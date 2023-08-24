@@ -16,7 +16,7 @@ type Props = {
 }
 
 export default function ({ children }: Props) {
-  const snapshot = useSyncExternalStore(subscribe, getSnapshot, ()=> 1000)
+  const snapshot = useSyncExternalStore(subscribe, getSnapshot, ()=> 1)
 
   return (
     <div
