@@ -70,16 +70,14 @@ const Page: NextPageWithLayout<
         .otherwise(() => {})
     }
     window.addEventListener('keydown', keyDownEvent, false)
-  }, [dec, inc])
+  }, [])
 
   useEffect(() => {
+    router.prefetch(`/${count + 1}`)
     router.push({
-      pathname: router.pathname,
-      query: {
-        slug: count,
-      },
+      pathname: `/${count}`,
     })
-  }, [count, router])
+  }, [count])
 
   return (
     <Slide>
