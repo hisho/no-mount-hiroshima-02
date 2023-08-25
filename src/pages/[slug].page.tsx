@@ -1,9 +1,9 @@
+import { MdxRemote } from '@/component/mdx-remote/mdx-remote'
 import { grayMatterRead } from '@/lib/gray-matter/gray-matter'
 import { NextPageWithLayout } from '@/pages/_app.page'
 import { Slide } from '@/pages/_component/slide'
 import { GetServerSidePropsContext, InferGetStaticPropsType } from 'next'
 import { useRouter } from 'next/router'
-import { MDXRemote } from 'next-mdx-remote'
 import { serialize } from 'next-mdx-remote/serialize'
 import path from 'path'
 import { useEffect } from 'react'
@@ -70,6 +70,7 @@ const Page: NextPageWithLayout<
         .otherwise(() => {})
     }
     window.addEventListener('keydown', keyDownEvent, false)
+    //eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
   useEffect(() => {
@@ -77,11 +78,12 @@ const Page: NextPageWithLayout<
     router.push({
       pathname: `/${count}`,
     })
+    //eslint-disable-next-line react-hooks/exhaustive-deps
   }, [count])
 
   return (
     <Slide>
-      <MDXRemote {...mdxSource} />
+      <MdxRemote source={mdxSource} />
     </Slide>
   )
 }

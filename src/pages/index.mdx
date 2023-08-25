@@ -9,7 +9,16 @@ title: First section
 hoge: hgua
 ---
 
-Section one.
+```tsx
+import { SyntaxHighlighter } from '@/component/syntax-highlighter/syntax-highlighter'
+import { MDXRemoteProps } from 'next-mdx-remote/dist'
+
+const components = {
+  code: (props) => {
+    return <SyntaxHighlighter code={props.content ?? ''} lang={'tsx'} />
+  },
+} satisfies MDXRemoteProps['components']
+```
 
 ---bbb
 title: Second section
@@ -31,3 +40,10 @@ title: Third section
 ---
 
 Section three.
+
+
+---ssss
+title: Third section
+---
+
+hisho

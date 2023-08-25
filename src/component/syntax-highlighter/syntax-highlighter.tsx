@@ -1,7 +1,8 @@
 'use client'
 
 import { Prism as ReactSyntaxHighlighter } from 'react-syntax-highlighter'
-import { tomorrow } from 'react-syntax-highlighter/dist/esm/styles/prism'
+import { tomorrow } from 'react-syntax-highlighter/dist/cjs/styles/prism'
+
 type Props = {
   code: string
   lang: 'tsx'
