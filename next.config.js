@@ -11,8 +11,9 @@ const nextConfig = {
         }
       : false,
   },
+  pageExtensions:['page.tsx'],
   poweredByHeader: false,
-  reactStrictMode: false,
+  reactStrictMode: false
 }
 
 module.exports = nextConfig

@@ -1,5 +1,3 @@
-'use client'
-
 import { ReactNode, useSyncExternalStore } from 'react'
 
 const getSnapshot = () => {
@@ -15,7 +13,7 @@ type Props = {
   children: ReactNode
 }
 
-export default function ({ children }: Props) {
+export const Layout = ({ children }: Props) => {
   const snapshot = useSyncExternalStore(subscribe, getSnapshot, () => 1)
 
   return (
