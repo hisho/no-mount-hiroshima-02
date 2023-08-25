@@ -14,6 +14,20 @@ const nextConfig = {
   pageExtensions: ['page.tsx'],
   poweredByHeader: false,
   reactStrictMode: false,
+  redirects: async () => {
+    return [
+      {
+        destination: '/1',
+        permanent:true,
+        source: '/'
+      },
+      {
+        destination: '/1',
+        permanent:true,
+        source: '/0'
+      },
+    ]
+  },
 }
 
 module.exports = nextConfig
