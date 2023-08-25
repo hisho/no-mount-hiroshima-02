@@ -3,7 +3,7 @@ import type { Config } from 'tailwindcss'
 import _ from 'lodash'
 
 export default {
-  content: ['./src/**/*.ts', './src/**/*.tsx'],
+  content: ['./src/**/*.ts', './src/**/*.tsx', './src/**/*.mdx'],
   theme: {
     extend: {
       spacing: Object.fromEntries(
