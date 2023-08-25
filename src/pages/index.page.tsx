@@ -8,7 +8,10 @@ import path from 'path'
 
 export const getStaticProps = async () => {
   const currentPath = path.resolve(process.cwd(), 'src/pages')
-  const { content, data } = matter.read(currentPath + '/index.mdx')
+  const { content, data } = matter.read(currentPath + '/index.mdx', {
+    // @ts-ignore
+    sections: true,
+  })
   const mdxSource = await serialize(content, {
     mdxOptions: {
       rehypePlugins: [],
