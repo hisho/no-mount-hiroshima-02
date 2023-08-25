@@ -1,4 +1,4 @@
-import { env } from '@/src/common/env'
+import { env } from '@/common/env'
 import { match } from 'ts-pattern'
 
 export const FRONTEND_URL = match(env)

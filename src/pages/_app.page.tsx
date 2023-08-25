@@ -1,8 +1,8 @@
 import type { AppProps } from 'next/app'
 
-import '@/src/pages/app.css'
-import { Layout } from '@/src/pages/layout'
-import { cn } from '@/src/util/cn/cn'
+import '@/pages/app.css'
+import { Layout } from '@/pages/layout'
+import { cn } from '@/util/cn/cn'
 import { NextPage } from 'next'
 import Head from 'next/head'
 import { ReactElement, ReactNode } from 'react'

@@ -1,6 +1,6 @@
-import { NextPageWithLayout } from '@/src/pages/_app.page'
-import { Heading } from '@/src/pages/_component/heading'
-import { Slide } from '@/src/pages/_component/slide'
+import { NextPageWithLayout } from '@/pages/_app.page'
+import { Heading } from '@/pages/_component/heading'
+import { Slide } from '@/pages/_component/slide'
 
 const Page: NextPageWithLayout = () => {
   return (
