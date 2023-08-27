@@ -34,6 +34,18 @@ export const getStaticProps = async (context: GetServerSidePropsContext) => {
     const { content, sections } = grayMatterRead(currentPath + '/index.mdx')
     const result = await bundleMDX({
       cwd: process.cwd(),
+      esbuildOptions(options) {
+        options.outdir = path.join(process.cwd(), '/public/img')
+        options.publicPath = '/img/'
+        options.write = true
+        options.target = 'esnext'
+        options.loader = {
+          ...options.loader,
+          '.jpg': 'file',
+          '.png': 'file',
+        }
+        return options
+      },
       source: `${content}${sections[slug - 1]?.content ?? '' ?? ''}`,
     })
 
