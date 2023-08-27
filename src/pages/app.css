@@ -2,6 +2,10 @@
 @tailwind components;
 @tailwind utilities;
 
+* {
+  line-height: 1;
+}
+
 a,
 img {
   display: block;
