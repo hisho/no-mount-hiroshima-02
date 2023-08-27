@@ -1,10 +1,10 @@
-import { MdxRemote } from '@/component/mdx-remote/mdx-remote'
+import { MdxComponent } from '@/component/mdx-component/mdx-component'
 import { grayMatterRead } from '@/lib/gray-matter/gray-matter'
 import { NextPageWithLayout } from '@/pages/_app.page'
 import { Slide } from '@/pages/_component/slide'
+import { bundleMDX } from 'mdx-bundler'
 import { GetServerSidePropsContext, InferGetStaticPropsType } from 'next'
 import { useRouter } from 'next/router'
-import { serialize } from 'next-mdx-remote/serialize'
 import path from 'path'
 import { useEffect } from 'react'
 import { useCounter } from 'react-use'
@@ -31,17 +31,15 @@ export const getStaticProps = async (context: GetServerSidePropsContext) => {
   try {
     const { slug } = paramsSchema.parse(context.params)
     const currentPath = path.resolve(process.cwd(), 'src/pages')
-    const { sections } = grayMatterRead(currentPath + '/index.mdx')
-    const mdxSource = await serialize(sections[slug - 1]?.content ?? '', {
-      mdxOptions: {
-        rehypePlugins: [],
-        remarkPlugins: [],
-      },
+    const { content, sections } = grayMatterRead(currentPath + '/index.mdx')
+    const result = await bundleMDX({
+      cwd: process.cwd(),
+      source: `${content}${sections[slug - 1]?.content ?? '' ?? ''}`,
     })
 
     return {
       props: {
-        mdxSource,
+        result,
         sections,
       },
     }
@@ -54,7 +52,7 @@ export const getStaticProps = async (context: GetServerSidePropsContext) => {
 
 const Page: NextPageWithLayout<
   InferGetStaticPropsType<typeof getStaticProps>
-> = ({ mdxSource, sections }) => {
+> = ({ result: { code }, sections }) => {
   const router = useRouter()
   const [count, { dec, inc }] = useCounter(
     Number(router.query['slug']) ?? 1,
@@ -83,7 +81,7 @@ const Page: NextPageWithLayout<
 
   return (
     <Slide>
-      <MdxRemote source={mdxSource} />
+      <MdxComponent source={code} />
     </Slide>
   )
 }

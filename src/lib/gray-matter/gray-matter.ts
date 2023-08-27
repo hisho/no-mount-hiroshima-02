@@ -2,6 +2,7 @@ import matter from 'gray-matter'
 import { z } from 'zod'
 
 const schema = z.object({
+  content: z.string(),
   sections: z
     .object({
       content: z.string(),
@@ -24,6 +25,7 @@ export const grayMatterRead = (path: string) => {
   }
 
   return {
+    content: '',
     sections: [],
   }
 }
