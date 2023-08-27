@@ -1,6 +1,5 @@
 import { SyntaxHighlighter } from '@/component/syntax-highlighter/syntax-highlighter'
-import { getMDXComponent } from 'mdx-bundler/client'
-import { MDXRemoteProps } from 'next-mdx-remote/dist'
+import { MDXContentProps, getMDXComponent } from 'mdx-bundler/client'
 import { useMemo } from 'react'
 import { P, match } from 'ts-pattern'
 
@@ -11,7 +10,7 @@ const components = {
         return <SyntaxHighlighter code={children} lang={'tsx'} />
       })
       .otherwise((children) => <code>{children}</code>),
-} satisfies MDXRemoteProps['components']
+} satisfies MDXContentProps['components']
 
 type Props = {
   source: string
