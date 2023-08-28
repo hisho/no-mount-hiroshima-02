@@ -3,7 +3,28 @@ meta:
   title: MDX読み込みテスト
 ---
 import {Heading} from "@/pages/_component/heading";
+import {Presenter} from "@/pages/_template/presenter";
 
+
+
+---Presenter
+title: First section
+---
+import image from '@/pages/_image/profile.jpg'
+
+<Presenter imageSrc={image}>
+  <div>
+    <div>
+      <h1 className={'text-40 font-bold leading-normal'}>Hisho Ohmasu</h1>
+      <p className={'font-bold text-22 mt-1'}>Frontend Developer</p>
+    </div>
+    <div className={'text-18 mt-12'}>
+      <p className={'leading-1.8'}>TypeScriptとNext.jsのApp RouterとGraphQLが好き</p>
+      <p className={'leading-1.8'}>趣味は音楽で、よくライブやフェスに行きます🤟</p>
+      <p className={'leading-1.8'}>最近の推しアーティストはPEOPLE 1です🐶</p>
+    </div>
+  </div>
+</Presenter>
 
 ---aaa
 title: First section
@@ -11,6 +32,7 @@ hoge: hgua
 ---
 
 <Heading>code</Heading>
+
 ```tsx
 import { SyntaxHighlighter } from '@/component/syntax-highlighter/syntax-highlighter'
 import { MDXRemoteProps } from 'next-mdx-remote/dist'
