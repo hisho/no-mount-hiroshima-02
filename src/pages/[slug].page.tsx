@@ -97,7 +97,12 @@ const Page: NextPageWithLayout<
 
   return (
     <Slide>
-      <div className={cn('grid', isCenter && 'place-content-center')}>
+      <div
+        className={cn(
+          'flex min-h-0 flex-1 flex-col',
+          isCenter && 'items-center justify-center'
+        )}
+      >
         <MdxComponent source={code} />
       </div>
       <p

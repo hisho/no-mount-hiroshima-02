@@ -2,17 +2,20 @@
 meta:
   title: MDX読み込みテスト
 ---
-import {Heading} from "@/pages/_component/heading";
 import {Presenter} from "@/pages/_template/presenter";
 
 
+---title: title
+center
+---
+# タイトル
+
 
 ---Presenter
-title: First section
 ---
 import image from '@/pages/_image/profile.jpg'
 
-<Presenter imageSrc={image}>
+<Presenter className={'h-full'} imageSrc={image}>
   <div>
     <div>
       <h1 className={'text-40 font-bold leading-normal'}>Hisho Ohmasu</h1>
@@ -26,48 +29,273 @@ import image from '@/pages/_image/profile.jpg'
   </div>
 </Presenter>
 
----aaa
-title: First section
-hoge: hgua
+---slide
+center
+---
+# 突然ですが質問です
+
+---slide
+center
+---
+#### TypeScriptを使用していて型で困った経験はありませんか？
+
+---slide
+center
+---
+# 本日はそんな
+
+---slide
+center
+---
+- 型がanyで困った経験を持つ方
+- 途中で型が消失して正しく推論されない経験を持つ方
+
+<p className={'mt-2 ml-auto text-right text-20'}>のお悩みを解決する</p>
+
+
+---slide
+center
+---
+# 三種の神器 🛡️🗡️🏺
+
+---slide
+center
+---
+## 紹介をします
+
+
+---slide
+center
+---
+# ケース1
+
+---slide
+center
 ---
 
-<Heading>code</Heading>
+<div className={'opacity-0'}>
+  #### hoge
+</div>
 
-```tsx
-import { SyntaxHighlighter } from '@/component/syntax-highlighter/syntax-highlighter'
-import { MDXRemoteProps } from 'next-mdx-remote/dist'
-
-const components = {
-  code: (props) => {
-    return <SyntaxHighlighter code={props.content ?? ''} lang={'tsx'} />
-  },
-} satisfies MDXRemoteProps['components']
+```ts
+const array = ['item1', 'item2', undefined] // ^? (string | undefined)[]
 ```
 
----bbb
-title: Second section
+<div className={'opacity-0'}>
+  #### hoge
+</div>
 
+---slide
+center
 ---
 
-Part 1.
+<div className={'text-center'}>
+  #### この配列からundefinedを取り除きたい👇
+</div>
 
+```ts
+const array = ['item1', 'item2', undefined] // ^? (string | undefined)[]
+```
+
+<div className={'opacity-0'}>
+  #### hoge
+</div>
+
+---slide
+center
 ---
 
-Part 2.
+<div className={'text-center'}>
+#### Booleanでundefinedを消すパターン
+</div>
 
+```ts
+const result1 = array.filter(Boolean)
+```
+
+<div className={'opacity-0'}>
+  #### hoge
+</div>
+
+
+---slide
+center
 ---
 
-Part 3.
+<div className={'text-center'}>
+#### typeofでundefinedを消すパターン
+</div>
 
----ccc
-title: Third section
+```ts
+const result2 = array.filter((n) => typeof n !== 'undefined')
+```
+
+<div className={'opacity-0'}>
+  #### hoge
+</div>
+
+---slide
+center
 ---
 
-Section three.
+<div className={'text-center'}>
+#### typeofでstringだけ残すパターン
+</div>
 
+```ts
+const result3 = array.filter((n) => typeof n === 'string')
+```
 
----ssss
-title: Third section
+<div className={'opacity-0'}>
+  #### hoge
+</div>
+
+---slide
+center
 ---
 
-hisho
+<div className={'text-center'}>
+#### 残念🙃 全部(string | undefined)[]で推論されるよ🤯
+</div>
+
+```ts
+const result1 = array.filter(Boolean) // ^? (string | undefined)[]
+const result2 = array.filter((n) => typeof n !== 'undefined') // ^? (string | undefined)[]
+const result3 = array.filter((n) => typeof n === 'string') // ^? (string | undefined)[]
+```
+
+<div className={'opacity-0'}>
+  #### hoge
+</div>
+
+
+---slide
+center
+---
+
+<h1 className={'text-80 text-center'}>🤔</h1>
+
+
+---slide
+center
+---
+
+<div className={'text-center'}>
+  #### 正しく推論させるのにはこのように書く必要がある👇
+</div>
+
+```ts
+const result1 = array.filter((n): n is string => Boolean(n)) // ^? string[]
+const result2 = array.filter((n): n is string => typeof n !== 'undefined') // ^? string[]
+const result3 = array.filter((n): n is string => typeof n === 'string') // ^? string[]
+```
+
+<div className={'opacity-0'}>
+  #### hoge
+</div>
+
+---slide
+center
+---
+<div className={'text-center'}>
+  # 🤔
+</div>
+
+```ts
+const result2 = array.filter((n): n is string => typeof n === 'undefined') // ^? string[]
+```
+
+<div className={'opacity-0'}>
+  # hoge
+</div>
+
+
+---slide
+center
+---
+
+<div className={'text-center'}>
+  # そこで今回紹介するのは
+</div>
+
+
+---slide
+center
+---
+
+<div className={'text-center'}>
+  # typesafe-utils
+</div>
+<a className={'absolute right-8 bottom-8 text-12 text-blue-500 hover:underline'} target={'_blank'} href="https://github.com/ivanhofer/typesafe-utils">https://github.com/ivanhofer/typesafe-utils</a>
+
+---slide
+center
+---
+<div className={'text-center'}>
+  # 😀
+</div>
+
+```ts
+import { isNotUndefined, isString } from 'typesafe-utils'
+const result1 = array.filter(isString) // ^? string[]
+const result2 = array.filter(isNotUndefined) // ^? string[]
+```
+
+<div className={'opacity-0'}>
+  # hoge
+</div>
+
+---slide
+center
+---
+# ケース2
+
+---slide
+center
+---
+<div className={'text-center'}>
+  ##### "noUncheckedIndexedAccess": trueの場合string | undefinedになる👇
+</div>
+
+```ts
+const nonEmptyArray = ['hi']
+
+if (!!nonEmptyArray.length) {
+  const result = nonEmptyArray[0]?.toUpperCase() // ^? string | undefined
+}
+```
+
+<div className={'opacity-0'}>
+  ##### hoge
+</div>
+
+---slide
+center
+---
+<div className={'text-center'}>
+  ##### typesafe-utilsを使うとstringになる😀
+</div>
+
+```ts
+import { isArrayNotEmpty } from 'typesafe-utils'
+const nonEmptyArray = ['hi']
+
+if (isArrayNotEmpty(nonEmptyArray)) {
+  const result = nonEmptyArray[0].toUpperCase() // ^? string
+}
+```
+
+<div className={'opacity-0'}>
+  ##### hoge
+</div>
+
+---slide
+center
+---
+import image from '@/pages/_image/typesafe-utils.png';
+
+<div className={'flex-1 w-full overflow-auto'}>
+  <div className={'aspect-[1788/6495] relative w-full'}>
+    <img className={'absolute inset-0 w-full'} src={image} />
+  </div>
+</div>

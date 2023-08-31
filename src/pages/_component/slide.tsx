@@ -12,7 +12,7 @@ export const Slide = ({ center = false, children, className }: Props) => {
   return (
     <div
       className={cn(
-        'relative grid h-full bg-gray-800 p-8',
+        'relative flex h-full flex-col bg-gray-800 p-8',
         center && centerClass,
         className
       )}

@@ -1,12 +1,13 @@
+import { cn } from '@/util/cn/cn'
 import { ComponentProps } from 'react'
 
 type Props = {
   imageSrc: string
-} & Pick<ComponentProps<'div'>, 'children'>
+} & Pick<ComponentProps<'div'>, 'children' | 'className'>
 
-export const Presenter = ({ children, imageSrc }: Props) => {
+export const Presenter = ({ children, className, imageSrc }: Props) => {
   return (
-    <div className={'grid grid-cols-2'}>
+    <div className={cn('grid grid-cols-2', className)}>
       <div className={'flex items-center justify-center'}>
         <div className={'relative aspect-square w-[80%]'}>
           <img

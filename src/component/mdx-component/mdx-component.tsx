@@ -26,6 +26,12 @@ const components = {
   h5: ({ className, ...props }) => (
     <h4 className={cn('text-20 font-bold', className)} {...props} />
   ),
+  li: ({ className, ...props }) => (
+    <li className={cn('text-30 font-bold leading-1.5', className)} {...props} />
+  ),
+  pre: ({ className, ...props }) => (
+    <pre className={cn('min-w-full', className)} {...props} />
+  ),
 } satisfies MDXContentProps['components']
 
 type Props = {
