@@ -2,6 +2,7 @@ import { MdxComponent } from '@/component/mdx-component/mdx-component'
 import { grayMatterRead } from '@/lib/gray-matter/gray-matter'
 import { NextPageWithLayout } from '@/pages/_app.page'
 import { Slide } from '@/pages/_component/slide'
+import { cn } from '@/util/cn/cn'
 import { bundleMDX } from 'mdx-bundler'
 import { GetServerSidePropsContext, InferGetStaticPropsType } from 'next'
 import { useRouter } from 'next/router'
@@ -51,6 +52,7 @@ export const getStaticProps = async (context: GetServerSidePropsContext) => {
 
     return {
       props: {
+        data: sections[slug - 1]?.data,
         result,
         sections,
       },
@@ -64,7 +66,8 @@ export const getStaticProps = async (context: GetServerSidePropsContext) => {
 
 const Page: NextPageWithLayout<
   InferGetStaticPropsType<typeof getStaticProps>
-> = ({ result: { code }, sections }) => {
+> = ({ data, result: { code }, sections }) => {
+  const isCenter = data ? /center/.test(data) : false
   const router = useRouter()
   const [count, { dec, inc }] = useCounter(
     Number(router.query['slug']) ?? 1,
@@ -93,7 +96,9 @@ const Page: NextPageWithLayout<
 
   return (
     <Slide>
-      <MdxComponent source={code} />
+      <div className={cn('grid', isCenter && 'place-content-center')}>
+        <MdxComponent source={code} />
+      </div>
     </Slide>
   )
 }
