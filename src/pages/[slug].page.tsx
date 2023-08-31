@@ -55,6 +55,7 @@ export const getStaticProps = async (context: GetServerSidePropsContext) => {
         data: sections[slug - 1]?.data,
         result,
         sections,
+        slideNumber: slug,
       },
     }
   } catch {
@@ -66,7 +67,7 @@ export const getStaticProps = async (context: GetServerSidePropsContext) => {
 
 const Page: NextPageWithLayout<
   InferGetStaticPropsType<typeof getStaticProps>
-> = ({ data, result: { code }, sections }) => {
+> = ({ data, result: { code }, sections, slideNumber }) => {
   const isCenter = data ? /center/.test(data) : false
   const router = useRouter()
   const [count, { dec, inc }] = useCounter(
@@ -99,6 +100,13 @@ const Page: NextPageWithLayout<
       <div className={cn('grid', isCenter && 'place-content-center')}>
         <MdxComponent source={code} />
       </div>
+      <p
+        className={
+          'absolute bottom-1 right-1 grid aspect-square w-5 place-content-center bg-black text-12 font-bold'
+        }
+      >
+        {slideNumber}
+      </p>
     </Slide>
   )
 }
