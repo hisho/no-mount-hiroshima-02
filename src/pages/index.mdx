@@ -330,7 +330,7 @@ center
 ---
 
 <div className={'text-center'}>
-  # そこ次に今回紹介するのは
+  # そこで次に今回紹介するのは
 </div>
 
 
@@ -491,10 +491,59 @@ center
 ```ts
 import { match } from 'ts-pattern';
 
-const descriptionWithPattern = match(animal)
+const descriptionWithPattern = match<Animal>(animal)
   .with({ type: 'dog' }, ({name}) => `This is a dog named ${name}`)
   .with({ type: 'cat' }, ({age}) => `This is a cat that is ${age} years old`)
   .exhaustive();
 ```
 
+---slide
+center
+---
 
+```ts
+type Animal =
+  | { age: number; type: 'cat' }
+  | { name: string; type: 'dog' }
+  | { type: 'bird'; wingspan: number } // 新たにbirdを追加
+```
+
+
+---slide
+center
+---
+
+```ts
+import { match } from 'ts-pattern';
+
+const descriptionWithPattern = match<Animal>(animal)
+  .with({ type: 'dog' }, ({ name }) => `This is a dog named ${name}`)
+  .with(
+    { type: 'cat' },
+    ({ age }) => `This is a cat that is ${age} years old`
+  )
+  .exhaustive()
+```
+
+```ts
+TS2349: This expression is not callable.
+Type
+NonExhaustiveError<{   type: "bird";   wingspan: number; }>
+has no call signatures.
+```
+
+
+---slide
+center
+---
+
+<div className={'text-center'}>
+  ### ts-patternならエラーを出してくれる😀
+</div>
+
+---slide
+center
+---
+
+## 神器2
+# ts-pattern
