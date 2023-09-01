@@ -116,7 +116,7 @@ const Page: NextPageWithLayout<
       </button>
       {isOpen && (
         <div className={'fixed inset-0 bg-black/60 backdrop-blur-lg'}>
-          // TODO サムネイル
+          TODO サムネイル
         </div>
       )}
       <p
