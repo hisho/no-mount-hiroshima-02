@@ -20,7 +20,10 @@ export default function App({ Component, pageProps }: AppPropsWithLayout) {
   return (
     <>
       <Head>
-        <title>title</title>
+        <title>
+          ＼広島開催／
+          若手エンジニア、デザイナーのための【ノーマウント勉強会】#2
+        </title>
         <meta content="noindex" name="robots" />
         <link
           href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text x=%2250%%22 y=%2250%%22 style=%22dominant-baseline:central;text-anchor:middle;font-size:90px;%22>📝</text></svg>"
