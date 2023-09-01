@@ -299,3 +299,202 @@ import image from '@/pages/_image/typesafe-utils.png';
     <img className={'absolute inset-0 w-full'} src={image} />
   </div>
 </div>
+
+---slide
+center
+---
+
+## 神器1
+# typesafe-utils
+
+---slide
+center
+---
+
+<div className={'text-center'}>
+# ケース3
+</div>
+
+---slide
+center
+---
+
+
+<div className={'text-center'}>
+# パターンマッチを持ち込みたい
+</div>
+
+
+---slide
+center
+---
+
+<div className={'text-center'}>
+  # そこ次に今回紹介するのは
+</div>
+
+
+---slide
+center
+---
+
+<div className={'text-center'}>
+  # ts-pattern
+</div>
+<a className={'absolute right-8 bottom-8 text-12 text-blue-500 hover:underline'} target={'_blank'} href="https://github.com/gvergnaud/ts-pattern">https://github.com/gvergnaud/ts-pattern</a>
+
+
+---slide
+center
+---
+
+<div className={'text-center'}>
+  # パターンマッチとは？🤔
+</div>
+
+---slide
+center
+---
+
+
+<div className={'text-center'}>
+  #### データ構造を特定の「パターン」に対してテストし、<br />その形状や内容に応じて処理を分岐する技術。
+</div>
+
+
+---slide
+center
+---
+import image from '@/pages/_image/space-cat.jpg';
+
+<img className={'absolute inset-0 w-full'} src={image} />
+
+
+---slide
+center
+---
+
+<div className={'text-center'}>
+  # まずはこの動画を見てほしい
+</div>
+
+---slide
+center
+---
+![image](https://user-images.githubusercontent.com/9265418/231688650-7cd957a9-8edc-4db8-a5fe-61e1c2179d91.gif)
+
+---slide
+center
+---
+
+<div className={'text-center'}>
+# 何が嬉しい？🤔
+</div>
+
+---slide
+center
+---
+
+<div className={'text-left'}>
+##### コードの可読性向上: 直感的な構文で複雑なデータ構造を処理。
+##### 安全性: 全てのケースを網羅的に扱うことで、未処理のパターンによるバグを避ける。
+</div>
+
+
+---slide
+center
+---
+import image from '@/pages/_image/ts-pattern-1.jpg';
+
+<img className={'absolute inset-0 w-full'} src={image} />
+
+---slide
+center
+---
+import image from '@/pages/_image/ts-pattern-2.jpg';
+
+<img className={'absolute inset-0 w-full'} src={image} />
+
+---slide
+center
+---
+import image from '@/pages/_image/ts-pattern-3.jpg';
+
+<img className={'absolute inset-0 w-full'} src={image} />
+
+---slide
+center
+---
+
+<div className={'text-center'}>
+  # その他にも
+</div>
+
+
+---slide
+center
+---
+
+```ts
+type Animal = { type: 'dog', name: string } | { type: 'cat', age: number };
+```
+
+
+---slide
+center
+---
+
+```ts
+function describeAnimalWithIf(animal: Animal): string {
+  if (animal.type === 'dog') {
+    return `This is a dog named ${animal.name}`;
+  } else if (animal.type === 'cat') {
+    return `This is a cat that is ${animal.age} years old`;
+  }
+  return 'Unknown animal type';
+}
+```
+
+---slide
+center
+---
+
+```ts
+function describeAnimalWithSwitch(animal: Animal): string {
+  switch (animal.type) {
+    case 'dog':
+      return `This is a dog named ${animal.name}`;
+    case 'cat':
+      return `This is a cat that is ${animal.age} years old`;
+    default:
+      return 'Unknown animal type';
+  }
+}
+```
+
+---slide
+center
+---
+
+```ts
+const descriptionWithTernary = animal.type === 'dog'
+  ? `This is a dog named ${animal.name}`
+  : animal.type === 'cat'
+  ? `This is a cat that is ${animal.age} years old`
+  : 'Unknown animal type';
+```
+
+---slide
+center
+---
+
+```ts
+import { match } from 'ts-pattern';
+
+const descriptionWithPattern = match(animal)
+  .with({ type: 'dog' }, ({name}) => `This is a dog named ${name}`)
+  .with({ type: 'cat' }, ({age}) => `This is a cat that is ${age} years old`)
+  .exhaustive();
+```
+
+
