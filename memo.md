@@ -146,7 +146,9 @@ type Type3 = z.input<typeof schema> // ^? {list: ZodArray<ZodString>["_input"]}
 
 おまけ(4種目)
 zodのエコシステムのtRPCのenvバリデーションのスタンドアロン版
-https://github.com/t3-oss/t3-env
+https://github
+
+.com/t3-oss/t3-env
 
 https://github.com/t3-oss/t3-env
 Next.js版があるのでぜひ使おう！！

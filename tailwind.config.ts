@@ -6,6 +6,15 @@ export default {
   content: ['./src/**/*.ts', './src/**/*.tsx', './src/**/*.mdx'],
   theme: {
     extend: {
+      animation: {
+        rotate: 'rotate 2s ease-in-out infinite',
+      },
+      keyframes: {
+        rotate: {
+          '0%': { transform: 'rotateY(0)' },
+          '100%': { transform: 'rotateY(360deg)' },
+        },
+      },
       spacing: Object.fromEntries(
         _.range(0, 211).map((n) => [n / 2, `${n / 8}rem`])
       ),

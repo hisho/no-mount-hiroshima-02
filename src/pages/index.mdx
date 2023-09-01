@@ -8,7 +8,7 @@ import {Presenter} from "@/pages/_template/presenter";
 ---title: title
 center
 ---
-# タイトル
+# 普段仕事で使っている三種の神器
 
 
 ---Presenter
@@ -17,8 +17,8 @@ import image from '@/pages/_image/profile.jpg'
 
 <Presenter className={'h-full'} imageSrc={image}>
   <div>
-    <div>
-      <h1 className={'text-40 font-bold leading-normal'}>Hisho Ohmasu</h1>
+    <div className={'mt-10'}>
+      <h1 className={'text-40 font-bold leading-1'}>Hisho Ohmasu</h1>
       <p className={'font-bold text-22 mt-1'}>Frontend Developer</p>
     </div>
     <div className={'text-18 mt-12'}>
@@ -547,3 +547,259 @@ center
 
 ## 神器2
 # ts-pattern
+
+
+---slide
+center
+---
+
+<div className={'text-center'}>
+  # ケース4
+</div>
+
+
+---slide
+center
+---
+
+<div className={'text-center'}>
+  # TypeScriptを使用している
+</div>
+
+---slide
+center
+---
+import image from '@/pages/_image/zod-logo.png';
+
+<img className={'w-100 animate-rotate hover:animate-none'} src={image} />
+
+<div className={'text-center'}>
+  # Zod
+</div>
+<a className={'absolute right-8 bottom-8 text-12 text-blue-500 hover:underline'} target={'_blank'} href="https://github.com/colinhacks/zod">https://github.com/colinhacks/zod</a>
+
+---slide
+center
+---
+
+<div className={'text-center'}>
+#### TypeScript-first schema validation with static type inference
+</div>
+
+---slide
+center
+---
+
+<div className={'text-center'}>
+  #### TypeScript-first <span className={'text-red-500'}>schema validation with static type inference</span>
+</div>
+
+---slide
+center
+---
+
+<div className={'text-center'}>
+  #### スキーマ定義と共に型もできる👇
+</div>
+
+```ts
+import { z } from "zod";
+
+const User = z.object({
+  username: z.string(),
+});
+
+User.parse({ username: "Ludwig" });
+
+// extract the inferred type
+type User = z.infer<typeof User>;// ^? { username: string }
+```
+
+<div className={'opacity-0'}>
+  #### hoge
+</div>
+
+
+---slide
+center
+---
+
+<div className={'text-center'}>
+  #### 値を後から加工する
+</div>
+
+```ts
+import { z } from 'zod'
+
+const User = z
+  .object({
+    email: z.string().optional(),
+    username: z.string(),
+  })
+  .transform(({ email, username }) => ({
+    username: username.toLowerCase(),
+    email: email ? email : '未設定',
+  }))
+
+const user = User.parse({ username: 'Ludwig' }) // { username: 'ludwig', email: '未設定' }
+
+type User = z.infer<typeof User> // ^? {email: string, username: ZodString["_output"]}
+```
+
+<div className={'opacity-0'}>
+  #### hoge
+</div>
+
+---slide
+center
+---
+
+<div className={'text-center'}>
+  #### 値を先に加工する
+</div>
+
+```ts
+import { z } from 'zod'
+
+const User = z
+  .object({
+    age: z.coerce.number(),
+    username: z.string(),
+  })
+
+// { age: 20, username: 'Ludwig' }
+const user = User.parse({ age: '20', username: 'Ludwig' })
+
+// ^? {age: ZodNumber["_output"], username: ZodString["_output"]}
+type User = z.infer<typeof User>
+```
+
+<div className={'opacity-0'}>
+  #### hoge
+</div>
+
+---slide
+center
+---
+
+<div className={'text-center'}>
+  #### どんな値でも型ガードできる🙋‍♂️
+</div>
+
+```ts
+import { z } from 'zod'
+
+const User = z.object({
+  userName: z.string(),
+})
+
+const result = User.safeParse('Ludwig')
+
+if (!result.success) {
+  return
+}
+
+// result ^? { username: 'Ludwig' }
+```
+
+<div className={'opacity-0'}>
+  #### hoge
+</div>
+
+
+---slide
+center
+---
+import image from '@/pages/_image/space-cat.jpg';
+
+<img className={'absolute inset-0 w-full'} src={image} />
+
+---slide
+center
+---
+<div className={'text-center'}>
+  # Zodは宇宙
+</div>
+
+
+---slide
+center
+---
+
+## 神器3
+# Zod
+
+
+---slide
+center
+---
+
+# おまけ
+
+---slide
+center
+---
+
+<div className={'text-center'}>
+  # t3-env
+</div>
+<a className={'absolute right-8 bottom-8 text-12 text-blue-500 hover:underline'} target={'_blank'} href="https://github.com/t3-oss/t3-env">https://github.com/t3-oss/t3-env</a>
+
+
+---slide
+center
+---
+
+#### tRPCのenvバリデーションのスタンドアローン版
+
+---slide
+center
+---
+
+```ts
+import { createEnv } from '@t3-oss/env-nextjs'
+import { z } from 'zod'
+
+export const env = createEnv({
+  client: {
+    NEXT_PUBLIC_NODE_ENV: z.enum(['development', 'production'] as const),
+  },
+  runtimeEnv: {
+    NEXT_PUBLIC_NODE_ENV: process.env['NODE_ENV'],
+    NODE_ENV: process.env['NODE_ENV'],
+  },
+  server: {
+    NODE_ENV: z.enum(['development', 'production'] as const),
+  },
+})
+```
+
+---slide
+center
+---
+
+```ts
+import { env } from '@/src/env'
+
+const NODE_ENV = env.NODE_ENV // ^? 'development' | 'production'
+```
+
+---slide
+center
+---
+
+##### Next.js版があるのでぜひ使おう！！
+##### 公式ではmjsだが拡張子はtsでも使用可能
+
+
+---slide
+center
+---
+
+## これであなたもガチガチ型マスター😎
+
+---slide
+center
+---
+
+# 終わり
