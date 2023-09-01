@@ -7,7 +7,7 @@ import { bundleMDX } from 'mdx-bundler'
 import { GetServerSidePropsContext, InferGetStaticPropsType } from 'next'
 import { useRouter } from 'next/router'
 import path from 'path'
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import { useCounter } from 'react-use'
 import { match } from 'ts-pattern'
 import { z } from 'zod'
@@ -95,6 +95,8 @@ const Page: NextPageWithLayout<
     //eslint-disable-next-line react-hooks/exhaustive-deps
   }, [count])
 
+  const [isOpen, setIsOpen] = useState(false)
+
   return (
     <Slide>
       <div
@@ -105,6 +107,18 @@ const Page: NextPageWithLayout<
       >
         <MdxComponent source={code} />
       </div>
+      <button
+        className={'absolute bottom-0 left-0 z-50'}
+        onClick={() => setIsOpen((prevState) => !prevState)}
+        type={'button'}
+      >
+        🔧
+      </button>
+      {isOpen && (
+        <div className={'fixed inset-0 bg-black/60 backdrop-blur-lg'}>
+          // TODO サムネイル
+        </div>
+      )}
       <p
         className={
           'absolute bottom-1 right-1 grid aspect-square w-5 place-content-center bg-black text-12 font-bold'
